@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Editorial Dashboard</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background: #f9f9f9;
+        }
+
+        .header {
+            background: #003366;
+            color: white;
+            padding: 1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .logo {
+            font-weight: bold;
+        }
+
+        .nav span {
+            margin-left: 1em;
+            cursor: pointer;
+        }
+
+        .main-container {
+            margin-top: 72px;
+        }
+
+        .breadcrumb a {
+            color: #0072c6;
+            text-decoration: none;
+            margin-right: 0.5em;
+        }
+
+        .details-box, .review-box, .decision-box, .feedback-form {
+            background: white;
+            padding: 1em;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1em;
+        }
+
+        .tabs {
+            margin-bottom: 1em;
+        }
+
+        .tab-button {
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0.5em 1em;
+        }
+
+        .tab-button.active {
+            text-decoration: underline;
+        }
+
+        .version-pane {
+            display: none;
+        }
+
+        .version-pane.active {
+            display: block;
+        }
+
+        .review-box p {
+            margin: 0.5em 0;
+        }
+
+        .feedback-form textarea {
+            width: 100%;
+            height: 100px;
+            margin-top: 1em;
+        }
+
+        button {
+            background: #0072c6;
+            color: white;
+            border: none;
+            padding: 0.5em 1em;
+            margin-top: 1em;
+            cursor: pointer;
+        }
+
+        .conditional-section {
+            display: none;
+            margin-top: 1em;
+        }
+
+        #confirm-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        #confirm-modal .modal-content {
+            background: white;
+            padding: 2em;
+            max-width: 400px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        #confirm-modal button {
+            margin: 0.5em;
+        }
+
+        #decision-buttons {
+            margin: 1em 0;
+        }
+
+        .decision-btn {
+            margin-right: 0.5em;
+            background: #f0f0f0;
+            color: #333;
+            border: 1px solid #ccc;
+            padding: 0.5em 1.2em;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .decision-btn.active {
+            background: #0072c6;
+            color: white;
+            border-color: #0072c6;
+        }
+
+        .toggle-report-link {
+            display: inline-block;
+            margin-top: 0.5em;
+            color: #0072c6;
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 0.95em;
+        }
+
+        .toggle-report-link:hover {
+            color: #004d99;
+        }
+    </style>
+</head>
+<body>
+<header class="header">
+    <div class="logo">SPRINGER NATURE</div>
+    <nav class="nav">
+        <span>Your work</span>
+        <span>Account</span>
+    </nav>
+</header>
+
+<div class="main-container">
+    <!-- LEFT PANE -->
+        <nav class="breadcrumb">
+            <a href="#">Home</a> > <a href="#">Tasks</a> > Assess editorial recommendation
+        </nav>
+
+        <h2>Assess editorial recommendation</h2>
+
+        <section class="submission-details">
+            <div class="details-box">
+                <p><strong>Submission title:</strong> Impact of Climate Change on Alpine Flora</p>
+                <p><strong>Author:</strong> Dr. Emily Carter</p>
+                <p><strong>Submitted on:</strong> 15 Mar 2025</p>
+                <p><strong>Abstract:</strong> This study investigates the long-term ecological effects of climate
+                    variability on high-altitude plant species in the European Alps using satellite data and field
+                    observations collected over two decades.</p>
+                <p><strong>Files/attachments:</strong></p>
+            </div>
+        </section>
+
+        <section class="tabs">
+            <button class="tab-button" onclick="showVersion(1)">Version 1</button>
+            <button class="tab-button" onclick="showVersion(2)">Version 2</button>
+            <button class="tab-button" onclick="showVersion(3)">Version 3</button>
+        </section>
+
+        <section id="version-content">
+            <!-- Version 1 -->
+            <div class="version-pane" id="version-1">
+                <div class="review-box">
+                    <h3>Reviewer | Dr. Anna Lee</h3>
+                    <p>Date: 25 Mar 2025</p>
+                    <p>Recommendation: Revise</p>
+                    <p>Comment: The methodology is robust, but clarification is needed in the statistical interpretation
+                        section. Please address figure inconsistencies as well.</p>
+                </div>
+                <div class="review-box">
+                    <h3>Reviewer | Prof. Jason Clark</h3>
+                    <p>Date: 26 Mar 2025</p>
+                    <p>Recommendation: Revise</p>
+                    <p>Comment: A compelling paper overall, but it lacks discussion on recent findings in the field.
+                        Consider citing newer sources.</p>
+                </div>
+                <div class="review-box">
+                    <h3>Reviewer | Dr. Karen Müller</h3>
+                    <p>Date: 27 Mar 2025</p>
+                    <p>Recommendation: Revise</p>
+                    <p>Comment: Improve clarity in the introduction, particularly the rationale for site selection.</p>
+                </div>
+            </div>
+
+            <!-- Version 2 -->
+            <div class="version-pane" id="version-2">
+                <div class="review-box">
+                    <h3>Reviewer | Dr. Ravi Patel</h3>
+                    <p>Date: 5 Apr 2025</p>
+                    <p>Recommendation: Revise</p>
+                    <p>Comment: The revised figures are clearer, but table legends are still confusing. Please reformat
+                        Table 2.</p>
+                </div>
+                <div class="review-box">
+                    <h3>Reviewer | Prof. Linda Zhou</h3>
+                    <p>Date: 6 Apr 2025</p>
+                    <p>Recommendation: Revise</p>
+                    <p>Comment: Good improvements overall. One concern remains about the generalizability of the
+                        findings.</p>
+                </div>
+                <div class="review-box">
+                    <h3>Reviewer | Dr. Matteo Rossi</h3>
+                    <p>Date: 6 Apr 2025</p>
+                    <p>Recommendation: Revise</p>
+                    <p>Comment: Please elaborate on the limitations mentioned in section 4 and reduce redundancy in the
+                        discussion.</p>
+                </div>
+            </div>
+
+            <!-- Version 3 -->
+            <div class="version-pane" id="version-3">
+                <div class="review-box">
+                    <h3>Handling editor | Editor 1</h3>
+                    <p>Date: 01 Apr 2025</p>
+                    <p>Recommendation: Revise</p>
+                    <p>Comment: I recommend to reject</p>
+                </div>
+                <div class="review-box">
+                    <h3>Reviewer | Reviewer A</h3>
+                    <p>Date: 25 Mar 2025</p>
+                    <p>Recommendation: Revise</p>
+
+                    <a href="#" class="toggle-report-link" onclick="toggleReport(event, this)">View full report ↓</a>
+                    <div class="full-report" style="display: none; margin-top: 1em;">
+                        <p><strong>Confidential feedback for the editor:</strong></p>
+                        <p>Recommendation: <strong>Revise</strong></p>
+
+                        <p><strong>Is the study design appropriate to answer the research question?</strong></p>
+                        <p>Yes</p>
+                        <p><strong>Are the methods sufficiently described to allow the study to be repeated?</strong>
+                        </p>
+                        <p>Yes</p>
+                        <p><strong>Is the use of statistics and treatment of uncertainties appropriate?</strong></p>
+                        <p>Yes</p>
+                        <p><strong>Is the presentation of the work clear?</strong></p>
+                        <p>Yes</p>
+                        <p><strong>Are the images in this manuscript free from apparent manipulation?</strong></p>
+                        <p>Yes</p>
+
+                        <p><strong>Confidential comments to the editor:</strong></p>
+                        <p>There are no ethical or conflict concerns. The study is sound, but several sections need
+                            clarification. Please review attached supplementary notes.</p>
+
+                        <p><strong>Feedback for the author(s):</strong></p>
+                        <p>This manuscript presents valuable findings. The introduction could be clearer, and the
+                            methods section needs better detail on the control samples used. Consider refining the
+                            statistical analysis to improve clarity.</p>
+                    </div>
+                </div>
+
+                <div class="review-box">
+                    <h3>Reviewer | Dr. Carlos Rivera</h3>
+                    <p>Date: 13 Apr 2025</p>
+                    <p>Recommendation: Reject</p>
+                    <p>Comment: Figures 3 and 5 are still ambiguous and the analysis does not fully support the
+                        conclusions drawn.</p>
+                </div>
+                <div class="review-box">
+                    <h3>Reviewer | Dr. Nina Sørensen</h3>
+                    <p>Date: 13 Apr 2025</p>
+                    <p>Recommendation: Reject</p>
+                    <p>Comment: Major concerns about the sampling strategy and data quality remain unresolved from
+                        previous rounds.</p>
+                </div>
+                <div class="review-box">
+                    <h3>Reviewer | Dr. Jina Srensen</h3>
+                    <p>Date: 13 Apr 2025</p>
+                    <p>Recommendation: Reject</p>
+                    <p>Comment: Major concerns about the sampling strategy and data quality remain unresolved from
+                        previous rounds.</p>
+                </div>
+            </div>
+        </section>
+
+    <!-- RIGHT PANE -->
+        <section class="decision-box">
+            <h3>Ready for a decision?</h3>
+            <label><input type="radio" name="ready" value="no" checked onchange="toggleFeedbackForm()"> No</label>
+            <label><input type="radio" name="ready" value="yes" onchange="toggleFeedbackForm()"> Yes</label>
+        </section>
+
+        <section class="feedback-form">
+            <div id="no-decision-options" class="conditional-section">
+                <button>Snooze</button>
+                <button>Invite more reviewers</button>
+            </div>
+
+            <div id="yes-decision-options" class="conditional-section">
+                <p>Please enter your specific feedback to authors here.</p>
+                <div id="decision-buttons">
+                    <button class="decision-btn" data-decision="accept" onclick="handleDecisionClick(event)">Accept
+                    </button>
+                    <button class="decision-btn" data-decision="revise" onclick="handleDecisionClick(event)">Revise
+                    </button>
+                    <button class="decision-btn" data-decision="reject" onclick="handleDecisionClick(event)">Reject
+                    </button>
+                </div>
+                <textarea id="feedback-textarea" placeholder="Write your feedback..."></textarea>
+                <button onclick="previewDecision()">Preview and send decision</button>
+            </div>
+        </section>
+</div>
+
+<!-- Modal -->
+<div id="confirm-modal">
+    <div class="modal-content">
+        <p>This will overwrite your current email text. Do you want to continue?</p>
+        <button onclick="confirmOverwrite(true)">Yes, overwrite</button>
+        <button onclick="confirmOverwrite(false)" style="background: gray;">Cancel</button>
+    </div>
+</div>
+
+<script>
+    function showVersion(version) {
+        document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+        document.querySelector('.tab-button:nth-child(' + version + ')').classList.add('active');
+        document.querySelectorAll('.version-pane').forEach(pane => pane.classList.remove('active'));
+        document.getElementById('version-' + version).classList.add('active');
+    }
+
+    function toggleFeedbackForm() {
+        const readyValue = document.querySelector('input[name="ready"]:checked').value;
+        document.getElementById('no-decision-options').style.display = readyValue === 'no' ? 'block' : 'none';
+        document.getElementById('yes-decision-options').style.display = readyValue === 'yes' ? 'block' : 'none';
+    }
+
+    let pendingDecision = null;
+    let previousButton = null;
+
+    function handleDecisionClick(event) {
+        event.preventDefault();
+        const btn = event.target;
+        pendingDecision = btn.dataset.decision;
+        previousButton = document.querySelector('.decision-btn.active');
+        const textarea = document.getElementById('feedback-textarea');
+        if (textarea.value !== "") {
+            document.getElementById('confirm-modal').style.display = 'flex';
+        } else {
+            populateEmailText(pendingDecision);
+        }
+    }
+
+    function confirmOverwrite(confirm) {
+        document.getElementById('confirm-modal').style.display = 'none';
+
+        if (confirm && pendingDecision) {
+            // Update button visual state
+            document.querySelectorAll('.decision-btn').forEach(btn => btn.classList.remove('active'));
+            const selectedBtn = document.querySelector(`.decision-btn[data-decision="${pendingDecision}"]`);
+            selectedBtn.classList.add('active');
+
+            populateEmailText(pendingDecision);
+        } else {
+            // Restore previous state
+            if (previousButton) previousButton.classList.add('active');
+        }
+
+        pendingDecision = null;
+        previousButton = null;
+    }
+
+
+    function populateEmailText(decision) {
+        const textarea = document.getElementById('feedback-textarea');
+        const title = "Impact of Climate Change on Alpine Flora";
+        const author = "Dr. Emily Carter";
+
+        const messages = {
+            accept: `Dear ${author},\n\nThank you for submitting your manuscript titled "${title}". We are pleased to inform you that it has been accepted for publication.\n\nBest regards,\nEditorial Team`,
+            revise: `Dear ${author},\n\nThank you for your submission titled "${title}". We would like to request revisions based on the reviewer feedback provided.\n\nBest regards,\nEditorial Team`,
+            reject: `Dear ${author},\n\nThank you for your submission titled "${title}". After careful review, we regret to inform you that it will not be considered for publication.\n\nSincerely,\nEditorial Team`
+        };
+
+        textarea.value = messages[decision] || "";
+    }
+
+    function previewDecision() {
+        const decision = document.querySelector('input[name="decision"]:checked')?.value;
+        const feedback = document.getElementById('feedback-textarea').value;
+        if (!decision || !feedback) {
+            alert('Please select a decision and enter your feedback.');
+            return;
+        }
+        alert(`Previewing Decision:\nDecision: ${decision}\nFeedback: ${feedback}`);
+    }
+
+    function toggleReport(event, link) {
+        event.preventDefault(); // Prevent page jump
+        const report = link.nextElementSibling;
+        const isVisible = report.style.display === "block";
+
+        report.style.display = isVisible ? "none" : "block";
+        link.textContent = isVisible ? "View full report ↓" : "Hide full report ↑";
+    }
+
+    window.onload = function () {
+        showVersion(3);
+        toggleFeedbackForm();
+    };
+</script>
+</body>
+</html>
